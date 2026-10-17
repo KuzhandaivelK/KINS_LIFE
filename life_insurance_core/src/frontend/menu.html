@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Insurance Core – Dashboard & Menus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="menu.css" />
+</head>
+<body class="dashboard-body">
+  <!-- Ambient background glow mesh -->
+  <div class="bg-mesh">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+  </div>
+
+  <div class="core-layout">
+    <!-- ============================================================== -->
+    <!-- LEFT SIDEBAR: Hierarchical Menus & Submenus (from MTB_MENUS)   -->
+    <!-- ============================================================== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <div class="brand-shield">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div class="brand-names">
+            <span class="brand-core">KINSURE<span class="accent-cyan">+</span></span>
+            <span class="brand-tag">LIFE CORE</span>
+          </div>
+        </div>
+        <button id="toggleSidebarBtn" class="collapse-btn" title="Collapse/Expand Menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="11 19 4 12 11 5"></polyline>
+            <polyline points="18 19 11 12 18 5"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Navigation Tree -->
+      <div class="nav-wrapper">
+        <div class="nav-section-title">
+          <span>CORE NAVIGATION</span>
+          <span class="tree-badge" id="menuTreeCount">Loading...</span>
+        </div>
+
+        <!-- Dashboard Shortcut -->
+        <a href="#dashboard" class="nav-item active" id="navDashboardHome">
+          <div class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </div>
+          <span class="nav-label">Core Dashboard</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <!-- Dynamic Menu Accordion loaded from MTB_MENUS -->
+        <div id="dynamicMenuAccordion" class="menu-accordion">
+          <!-- Loading placeholder -->
+          <div class="sidebar-skeleton">
+            <div class="skel-row"></div>
+            <div class="skel-row"></div>
+            <div class="skel-row"></div>
+            <div class="skel-row"></div>
+            <div class="skel-row"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar User Profile Footer -->
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar" id="sidebarAvatar">A</div>
+          <div class="user-info">
+            <span class="user-name" id="sidebarUsername">Admin</span>
+            <span class="user-group-badge" id="sidebarUserGroup">Data_entry</span>
+          </div>
+        </div>
+        <button id="sidebarLogoutBtn" class="sidebar-logout-icon" title="Sign Out">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ============================================================== -->
+    <!-- RIGHT MAIN CONTENT: Top Navigation + Combined Dashboard View   -->
+    <!-- ============================================================== -->
+    <div class="main-wrapper">
+      <!-- Top Header Bar -->
+      <header class="top-header">
+        <div class="header-left">
+          <button id="mobileMenuBtn" class="mobile-toggle-btn" aria-label="Toggle Navigation">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <div class="breadcrumbs">
+            <span class="crumb-root">Kinsure+ Core</span>
+            <span class="crumb-separator">/</span>
+            <span class="crumb-current" id="breadcrumbCurrent">Dashboard Overview</span>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <!-- Oracle DB Connection Status Pill -->
+          <div class="db-pill" title="Oracle Database 19c Connected">
+            <span class="pulse-dot"></span>
+            <span class="db-text">Oracle: <strong>PROP_PLUS/orcl</strong></span>
+          </div>
+
+          <!-- Live Clock -->
+          <div class="clock-badge" id="liveClock">--:--:--</div>
+
+          <!-- User Pill & Logout -->
+          <div class="user-action-pill">
+            <span class="user-pill-name" id="headerUsername">Admin</span>
+            <button id="headerLogoutBtn" class="quick-logout-btn">Sign Out</button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Dashboard Page Body -->
+      <main class="dashboard-content">
+        <!-- Hero Welcome Banner -->
+        <section class="hero-banner">
+          <div class="hero-meta">
+            <div class="hero-chip">CORE LIFE INSURANCE PLATFORM</div>
+            <h1 id="heroGreeting">Welcome back, Admin</h1>
+            <p class="hero-lead">
+              Insurance core operational dashboard with dynamic module navigation fed live from Oracle table <code class="hl-code">MTB_MENUS</code>.
+            </p>
+          </div>
+
+          <div class="hero-actions">
+            <button class="primary-act-btn" id="btnQuickProposal">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span>New Proposal</span>
+            </button>
+            <button class="secondary-act-btn" id="btnRefreshData">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <polyline points="1 20 1 14 7 14"></polyline>
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+              </svg>
+              <span>Refresh Core</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- KPI Metrics Grid -->
+        <section class="kpi-grid">
+          <div class="kpi-card card-policies">
+            <div class="kpi-header">
+              <span class="kpi-title">Active Policies</span>
+              <div class="kpi-icon-wrap icon-blue">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="kpi-body">
+              <span class="kpi-value" id="kpiPolicies">48,290</span>
+              <div class="kpi-sub">
+                <span class="trend-badge trend-up">↑ 14.2%</span>
+                <span class="kpi-desc">vs prior month</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="kpi-card card-premium">
+            <div class="kpi-header">
+              <span class="kpi-title">Gross Written Premium</span>
+              <div class="kpi-icon-wrap icon-emerald">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="1" x2="12" y2="23"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="kpi-body">
+              <span class="kpi-value" id="kpiGwp">$24.8M</span>
+              <div class="kpi-sub">
+                <span class="trend-badge trend-up">↑ 9.4%</span>
+                <span class="kpi-desc">above target target</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="kpi-card card-proposals">
+            <div class="kpi-header">
+              <span class="kpi-title">Pending Underwriting</span>
+              <div class="kpi-icon-wrap icon-amber">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                </svg>
+              </div>
+            </div>
+            <div class="kpi-body">
+              <span class="kpi-value" id="kpiUnderwriting">138</span>
+              <div class="kpi-sub">
+                <span class="trend-badge trend-amber">24 Priority</span>
+                <span class="kpi-desc">in medical queue</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="kpi-card card-claims">
+            <div class="kpi-header">
+              <span class="kpi-title">Claims Settlement Ratio</span>
+              <div class="kpi-icon-wrap icon-purple">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div class="kpi-body">
+              <span class="kpi-value" id="kpiClaims">98.8%</span>
+              <div class="kpi-sub">
+                <span class="trend-badge trend-up">1.8 Days</span>
+                <span class="kpi-desc">turnaround speed</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Core Menus & Modules Showcase Section -->
+        <section class="dashboard-section">
+          <div class="section-top">
+            <div>
+              <h2 class="section-heading">Core Insurance Modules</h2>
+              <p class="section-sub">
+                Modules loaded live from <code class="hl-code">MTB_MENUS (WHERE MENU_PARENT_ID = '*')</code> with future-ready hierarchical submenus.
+              </p>
+            </div>
+            <div class="search-wrap">
+              <input type="text" id="moduleFilterInput" placeholder="Filter module name..." />
+            </div>
+          </div>
+
+          <div class="modules-showcase-grid" id="modulesShowcaseGrid">
+            <!-- Populated dynamically by menu.js -->
+          </div>
+        </section>
+
+        <!-- Pipeline Table & System Telemetry Two-Column Grid -->
+        <section class="dashboard-split-grid">
+          <!-- Recent Proposals Pipeline -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title">Underwriting & Proposal Pipeline</h3>
+                <span class="panel-sub">Recent proposal submissions in life insurance core</span>
+              </div>
+              <span class="panel-count-badge">Live Feed</span>
+            </div>
+
+            <div class="table-responsive">
+              <table class="core-table">
+                <thead>
+                  <tr>
+                    <th>Proposal No</th>
+                    <th>Customer Name</th>
+                    <th>Plan / Product</th>
+                    <th>Sum Assured</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="proposalsTableBody">
+                  <tr>
+                    <td><code>PROP-2026-8941</code></td>
+                    <td>David Richardson</td>
+                    <td>Term Life Elite (30Y)</td>
+                    <td class="num-col">$500,000</td>
+                    <td><span class="status-tag status-approved">Approved</span></td>
+                  </tr>
+                  <tr>
+                    <td><code>PROP-2026-8940</code></td>
+                    <td>Priya Narayanan</td>
+                    <td>Endowment Shield Plus</td>
+                    <td class="num-col">$250,000</td>
+                    <td><span class="status-tag status-review">Under Review</span></td>
+                  </tr>
+                  <tr>
+                    <td><code>PROP-2026-8939</code></td>
+                    <td>Michael Chang</td>
+                    <td>Whole Life Protector</td>
+                    <td class="num-col">$750,000</td>
+                    <td><span class="status-tag status-pending">Pending Med</span></td>
+                  </tr>
+                  <tr>
+                    <td><code>PROP-2026-8938</code></td>
+                    <td>Sarah Jenkins</td>
+                    <td>Child Future Assurance</td>
+                    <td class="num-col">$150,000</td>
+                    <td><span class="status-tag status-inforce">In Force</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Oracle Telemetry & Batch Status -->
+          <div class="panel-card telemetry-card">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title">Oracle Telemetry & Batch Engine</h3>
+                <span class="panel-sub">Core database status & microservice connectivity</span>
+              </div>
+              <span class="status-live-dot">● ONLINE</span>
+            </div>
+
+            <div class="telemetry-items">
+              <div class="tele-item">
+                <span class="tele-label">Database Schema</span>
+                <span class="tele-val"><code>PROP_PLUS</code> (Oracle 19c)</span>
+              </div>
+              <div class="tele-item">
+                <span class="tele-label">Connect String</span>
+                <span class="tele-val"><code>localhost:1521/orcl</code></span>
+              </div>
+              <div class="tele-item">
+                <span class="tele-label">User Auth Table</span>
+                <span class="tele-val"><code>MTB_USERS</code> (Active)</span>
+              </div>
+              <div class="tele-item">
+                <span class="tele-label">Menu Registry</span>
+                <span class="tele-val"><code>MTB_MENUS</code> (Hierarchical)</span>
+              </div>
+              <div class="tele-item">
+                <span class="tele-label">Daily Renewal Engine</span>
+                <span class="tele-val status-ok">Scheduled (00:00 UTC)</span>
+              </div>
+              <div class="tele-item">
+                <span class="tele-label">Auto-Debit Gateway</span>
+                <span class="tele-val status-ok">Operational</span>
+              </div>
+            </div>
+
+            <div class="quick-audit-note">
+              <span>Session Logged as: <strong id="telemetryUser">admin [Data_entry]</strong></span>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- App Footer -->
+      <footer class="core-footer">
+        <div>Kinsure+ Life Insurance Core System • Microservices Architecture</div>
+        <div>Oracle Database: <span class="footer-hl">PROP_PLUS/orcl</span> • Connected</div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="menu.js"></script>
+</body>
+</html>

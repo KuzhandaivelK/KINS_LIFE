@@ -1,0 +1,21 @@
+{
+  "name": "life_insurance_core",
+  "version": "1.0.0",
+  "description": "Microservices based life insurance core application",
+  "main": "src/backend/auth/server.js",
+  "scripts": {
+    "start": "node src/backend/auth/server.js",
+    "frontend": "npx -y serve src/frontend -l 3001",
+    "dev": "npx -y concurrently \"npm run start\" \"npm run frontend\""
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "oracledb": "^6.2.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "serve": "^14.2.0"
+  }
+}
