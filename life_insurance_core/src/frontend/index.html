@@ -7,9 +7,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="theme.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body data-theme="light">
   <div class="bg-mesh">
     <div class="circle circle-1"></div>
     <div class="circle circle-2"></div>
@@ -17,6 +18,12 @@
   </div>
 
   <div class="login-wrapper">
+    <div class="login-theme-bar">
+      <button id="themeToggleBtn" class="theme-toggle-btn" type="button" title="Toggle Theme (Default: Light Mode)">
+        <span id="themeIcon">☀️</span>
+        <span id="themeLabel">Light</span>
+      </button>
+    </div>
     <div class="glass-card">
       <div class="card-header">
         <div class="brand-badge">
@@ -77,13 +84,10 @@
         <svg id="alertIcon" class="alert-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"></svg>
         <span id="alertMsg"></span>
       </div>
-
-      <div class="card-footer">
-        <p>Connected to Oracle DB <span class="badge">PROP_PLUS</span></p>
-      </div>
     </div>
   </div>
 
+  <script src="theme.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

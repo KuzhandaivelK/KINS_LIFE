@@ -170,7 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
           subItem.className = 'sub-nav-item';
           subItem.innerHTML = `
             <span>${child.MENU_DISP_NAME || child.MENU_NAME}</span>
-            <span class="sub-id-tag">${child.MENU_ID}</span>
           `;
 
           subItem.addEventListener('click', (e) => {

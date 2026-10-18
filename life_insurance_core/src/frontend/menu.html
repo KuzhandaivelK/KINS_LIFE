@@ -7,9 +7,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="theme.css" />
   <link rel="stylesheet" href="menu.css" />
 </head>
-<body class="dashboard-body">
+<body class="dashboard-body" data-theme="light">
   <!-- Ambient background glow mesh -->
   <div class="bg-mesh">
     <div class="glow-orb orb-1"></div>
@@ -118,14 +119,14 @@
         </div>
 
         <div class="header-right">
-          <!-- Oracle DB Connection Status Pill -->
-          <div class="db-pill" title="Oracle Database 19c Connected">
-            <span class="pulse-dot"></span>
-            <span class="db-text">Oracle: <strong>PROP_PLUS/orcl</strong></span>
-          </div>
-
           <!-- Live Clock -->
           <div class="clock-badge" id="liveClock">--:--:--</div>
+
+          <!-- Project Theme Switcher -->
+          <button id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Theme (Default: Light Mode)">
+            <span id="themeIcon">☀️</span>
+            <span id="themeLabel">Light</span>
+          </button>
 
           <!-- User Pill & Logout -->
           <div class="user-action-pill">
@@ -143,7 +144,7 @@
             <div class="hero-chip">CORE LIFE INSURANCE PLATFORM</div>
             <h1 id="heroGreeting">Welcome back, Admin</h1>
             <p class="hero-lead">
-              Insurance core operational dashboard with dynamic module navigation fed live from Oracle table <code class="hl-code">MTB_MENUS</code>.
+              Insurance core operational dashboard with dynamic module navigation fed live from table <code class="hl-code">MTB_MENUS</code>.
             </p>
           </div>
 
@@ -321,24 +322,24 @@
             </div>
           </div>
 
-          <!-- Oracle Telemetry & Batch Status -->
+          <!-- System Telemetry & Batch Status -->
           <div class="panel-card telemetry-card">
             <div class="panel-header">
               <div>
-                <h3 class="panel-title">Oracle Telemetry & Batch Engine</h3>
-                <span class="panel-sub">Core database status & microservice connectivity</span>
+                <h3 class="panel-title">System Telemetry & Batch Engine</h3>
+                <span class="panel-sub">Core service status & microservice connectivity</span>
               </div>
               <span class="status-live-dot">● ONLINE</span>
             </div>
 
             <div class="telemetry-items">
               <div class="tele-item">
-                <span class="tele-label">Database Schema</span>
-                <span class="tele-val"><code>PROP_PLUS</code> (Oracle 19c)</span>
+                <span class="tele-label">Core Database</span>
+                <span class="tele-val status-ok">Connected</span>
               </div>
               <div class="tele-item">
-                <span class="tele-label">Connect String</span>
-                <span class="tele-val"><code>localhost:1521/orcl</code></span>
+                <span class="tele-label">Core Gateway</span>
+                <span class="tele-val"><code>REST API: 3000</code></span>
               </div>
               <div class="tele-item">
                 <span class="tele-label">User Auth Table</span>
@@ -368,11 +369,12 @@
       <!-- App Footer -->
       <footer class="core-footer">
         <div>Kinsure+ Life Insurance Core System • Microservices Architecture</div>
-        <div>Oracle Database: <span class="footer-hl">PROP_PLUS/orcl</span> • Connected</div>
+        <div>System Engine: <span class="footer-hl">Active</span> • Connected</div>
       </footer>
     </div>
   </div>
 
+  <script src="theme.js"></script>
   <script src="menu.js"></script>
 </body>
 </html>
